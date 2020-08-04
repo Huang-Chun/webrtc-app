@@ -32,7 +32,11 @@ public class PermissionActivity extends Activity {
 
         switch (intent.getIntExtra("permissionRequestCode", AUDIO_PERMISSION_REQUEST_CODE)) {
             case AUDIO_PERMISSION_REQUEST_CODE:
-                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_PERMISSION_REQUEST_CODE);
+//                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_PERMISSION_REQUEST_CODE);
+                final Intent resultIntent = new Intent(this, ScreenShareService.class);
+                resultIntent.putExtra("result", true);
+                startService(resultIntent);
+                this.finish();
                 break;
             case CAPTURE_PERMISSION_REQUEST_CODE:
                 MediaProjectionManager mediaProjectionManager =
